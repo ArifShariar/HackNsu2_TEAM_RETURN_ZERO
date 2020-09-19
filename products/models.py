@@ -30,6 +30,3 @@ class notification(models.Model):
 
     def __str__(self):
         return self.noti_msg
-
-
-
