@@ -14,14 +14,14 @@
   </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.8 (HackNsu2_TEAM_RETURN_ZERO)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
     <option name="TEMPLATE_FOLDERS">
       <list>
-        <option value="$MODULE_DIR$/../HackNsu2_TEAM_RETURN_ZERO\templates" />
+        <option value="F:/HackNsu2_TEAM_RETURN_ZERO\templates" />
       </list>
     </option>
   </component>
