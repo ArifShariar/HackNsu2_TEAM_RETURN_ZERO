@@ -9,18 +9,19 @@
     <div class="fadeIn first">
      <!-- <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" /> -->
     </div>
-    <form>
-      <input type="text" id="company_name" class="fadeIn second" name="login" placeholder="Company Name">
+    <form method="post">
+      {% csrf_token %}
+      <input type="text" id="company_name" class="fadeIn second" name="company_name" placeholder="Company Name">
       <input type="text" id="email" class="fadeIn second" name="email" placeholder="Email">
-      <input type="password" id="password" class="fadeIn third" name="login" placeholder="Password">
+      <input type="password" id="password" class="fadeIn third" name="login" placeholder="password">
       <input type="password" id="confirm_password" class="fadeIn third" name="confirm_password" placeholder="Confirm Password">
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="radio" id="radio1" value="vendor">
+            <input class="form-check-input" type="radio" name="user_type" id="radio1" value="vendor">
             <label class="form-check-label" for="radio1">Vendor</label>
         </div>
 
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="radio" id="radio1" value="vendor">
+            <input class="form-check-input" type="radio" name="user_type" id="radio1" value="customer">
             <label class="form-check-label" for="radio1">Customer</label>
         </div>
 
