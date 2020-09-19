@@ -23,4 +23,8 @@ urlpatterns = [
     path('', home_views.index),
     path('login', home_views.login, name='login'),
     path('signup', home_views.signup, name='signup'),
+    path('products', home_views.products, name='products'),
+    path('vendors', home_views.vendors, name='vendors'),
+    path('customers', home_views.customers, name='customers'),
+    path('contact', home_views.contact, name='contact'),
 ]

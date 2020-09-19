@@ -14,3 +14,19 @@ def login(request):
 
 def signup(request):
     return render(request, 'auth/signup.html')
+
+
+def products(request):
+    return render(request, 'products/all_product.html')
+
+
+def vendors(request):
+    return render(request, 'review/vendor_review.html')
+
+
+def customers(request):
+    return render(request, 'review/customer_review.html')
+
+
+def contact(request):
+    return render(request, 'others/contact.html')
