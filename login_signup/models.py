@@ -10,6 +10,7 @@ class Customer(models.Model):
     def __str__(self):
         return self.user.username
 
+
 class Vendor(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -18,6 +19,7 @@ class Vendor(models.Model):
 
     def __str__(self):
         return self.user.username
+
 
 class Employee(models.Model):
 
