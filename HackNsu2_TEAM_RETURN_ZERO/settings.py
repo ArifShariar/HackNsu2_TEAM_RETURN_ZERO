@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'login_signup.apps.LoginSignupConfig',
     'static',
     'home',
+    'products',
 ]
 
 MIDDLEWARE = [
