@@ -27,13 +27,15 @@ def login_view(request):
 
         if user:
             login(request,user)
+
             usertype, user = check_usertype(request)
-            if check_usertype(request) == 'customer':
+
+            if usertype == 'customer':
                 dict = {}
                 dict['email'] = email # will add company
                 dict['type'] = usertype
                 return render(request, 'profile/customer_profile.html', dict)
-            elif check_usertype(request) == 'vendor':
+            elif usertype == 'vendor':
                 dict = {}
                 dict['email'] = email # will add company
                 dict['type'] = usertype
@@ -60,6 +62,9 @@ def signup_view(request):
             user.save()
             customer = Customer.objects.create(company_name=company_name, user=user)
 
+            user = authenticate(username=email, password=password)
+            login(request,user)
+            
             dict = {}
             dict['email'] = email
             dict['company_name'] = company_name
@@ -72,6 +77,9 @@ def signup_view(request):
             user.set_password(password)
             user.save()
             vendor = Vendor.objects.create(company_name=company_name, user=user)
+
+            user = authenticate(username=email, password=password)
+            login(request,user)
 
             dict = {}
             dict['email'] = email

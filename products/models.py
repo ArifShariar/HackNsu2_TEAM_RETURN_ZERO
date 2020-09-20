@@ -11,13 +11,13 @@ class vendor_product_categories(models.Model):
 class vendor_product(models.Model):
     name = models.CharField(max_length=30)
     amount = models.IntegerField()
-    price = models.FloatField(null=True)
+    price = models.CharField(max_length=30, null=True)
     category_fk = models.ForeignKey(vendor_product_categories, on_delete=models.DO_NOTHING, null=True)
     vendor_fk = models.ForeignKey(md.Vendor, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         # Built-in attribute of django.contrib.auth.models.User !
-        return self.name + " amount: "+ self.amount
+        return self.name
 
 class company_product(models.Model):
     name = models.CharField(max_length=30)
