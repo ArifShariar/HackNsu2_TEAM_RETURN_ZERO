@@ -50,9 +50,21 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'contact' %}">Contact</a>
                     </li>
+                    {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Log Out</a>
+                        <a class="nav-link" href="{% url 'profile' %}">My Profile</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+                    </li>
+                    {% endif %}
 
                 </ul>
             </div>
@@ -95,11 +107,9 @@
             <div class="col-md-4">
                 <div class="profile-work">
                     <p>OFFICIAL LINKS</p>
-                    <a href="">NOTICES</a><br/>
-                    <a href="">CONTACT US</a><br/>
-                    <a href="">FAQ</a>
-
-                    <a href="">YOUR PRODUCTS</a><br/>
+                    <a href="">Notifications</a><br/>
+                    <a href="{% url 'vendor_products' %}">Your Inventory</a><br/>
+                    <a href="{% url 'contact' %}">CONTACT US</a><br/>
                 </div>
             </div>
 
