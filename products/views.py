@@ -15,13 +15,15 @@ def check_usertype(request):
             return 'vendor', Vendor.objects.get(user=request.user.id)
         else:
             return ' ', ' '
+    else:
+        return ' ', ' '
 
 # Create your views here.
 def add_vendor_product(request):
 
     type, instance = check_usertype(request)
 
-    if (type=='vendor'):
+    if type=='vendor':
 
         if request.method == 'POST':
 
