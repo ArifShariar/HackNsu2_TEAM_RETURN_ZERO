@@ -3,10 +3,118 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Our Products</title>
-    <link rel="stylesheet" href="{% static 'css/all_product.css' %}">
+    <title>Modern Business: Products</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all_product.css' %}"/>
+
+    <!-- Bootstrap links -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- font awesome cdn -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" >
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+
+
+
 </head>
 <body>
+
+<!-- Nav bar -->
+    <section id="nav-bar">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+            <!-- download link  https://getbootstrap.com/docs/4.5/components/navbar/ -->
+            <a class="navbar-brand" href="#"><img src="{% static 'img/logo.png' %}"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home_page' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'vendors' %}">Vendors</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'customers' %}">Customers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'products' %}">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+                    </li>
+                    {% endif %}
+
+                </ul>
+            </div>
+        </nav>
+    </section>
+
+
+<!----- products, run for loop here ------>
+
+<div class="container">
+    <h3 class="h3"> Our Products </h3>
+    <div class="row">
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid4">
+                <div class="product-image4">
+                    <a href="#">
+                        <img class="pic-1" src="http://bestjquery.com/tutorial/product-grid/demo5/images/img-1.jpg"> <!--- change image link ---->
+                        <img class="pic-2" src="http://bestjquery.com/tutorial/product-grid/demo5/images/img-2.jpg">
+                    </a>
+                    <ul class="social">
+                        <li><a href="#" data-tip="Buy"><i class="fa fa-shopping-cart"></i></a></li>
+                    </ul>
+
+                    <!-- this should be in if-else clause -->
+
+                    <!--
+                    <span class="product-new-label">New</span>
+                    <span class="product-discount-label">-10%</span>
+                    -->
+                    <!--- --->
+
+                </div>
+                <div class="product-content">
+                    <h3 class="title"><a href="#">Women's Black Top</a></h3>
+                    <div class="price">
+                        $14.4 <!-- should be dynamic -->
+                    </div>
+                    <a class="add-to-cart" href="">Buy</a>  <!-- ADD URL HERE -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- end for loop -->
+<hr>
+
 
 </body>
 </html>
