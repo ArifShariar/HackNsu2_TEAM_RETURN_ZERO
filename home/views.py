@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from login_signup import models as ls
+from login_signup.models import *
+
 from products import models as p
 import datetime
 # Create your views here.
@@ -21,12 +22,16 @@ def place_order(product_obj , amount , customer_obj ):
 
 def customers(request):
     dict = {}
-    dict['customers'] = list(ls.Customer.objects.all())
+    dict['customers'] = list(Customer.objects.all())
     return render(request, 'review/customer_review.html' , dict)
 
 def vendors(request):
-    return render(request, 'review/vendor_review.html')
+    vendors = []
+    vendors_raw = Vendor.objects.all()
+    for v in vendors_raw:
+        vendors.append([v.company_name, v.user.email])
+    dict = {'vendors':vendors}
+    return render(request, 'profile/vendor_list.html', dict)
 
 def contact(request):
     return render(request, 'others/contact.html')
-

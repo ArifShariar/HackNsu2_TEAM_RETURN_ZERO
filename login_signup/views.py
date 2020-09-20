@@ -14,7 +14,9 @@ def check_usertype(request):
         elif Vendor.objects.filter(user=request.user.id).exists():
             return 'vendor', Vendor.objects.get(user=request.user.id)
         else:
-            return None, None
+            return ' ', ' '
+    else:
+        return ' ', ' '
 
 # Create your views here.
 def login_view(request):
@@ -30,16 +32,8 @@ def login_view(request):
 
             usertype, user = check_usertype(request)
 
-            if usertype == 'customer':
-                dict = {}
-                dict['email'] = email # will add company
-                dict['type'] = usertype
-                return render(request, 'profile/customer_profile.html', dict)
-            elif usertype == 'vendor':
-                dict = {}
-                dict['email'] = email # will add company
-                dict['type'] = usertype
-                return render(request, 'profile/vendor_profile.html', dict)
+            if usertype == 'customer' or usertype=='vendor':
+                return HttpResponseRedirect(reverse('profile'))
         else:
             # Handle Failed Login
             return HttpResponse("Invalid login details supplied.")
@@ -66,12 +60,7 @@ def signup_view(request):
             user = authenticate(username=email, password=password)
             login(request,user)
 
-            dict = {}
-            dict['email'] = email
-            dict['company_name'] = company_name
-            dict['type'] = user_type
-
-            return render(request, 'profile/customer_profile.html', dict)
+            return HttpResponseRedirect(reverse('profile'))
 
         elif user_type.lower() == 'vendor':
             user = User.objects.create(username=email, email=email)
@@ -83,12 +72,7 @@ def signup_view(request):
             user = authenticate(username=email, password=password)
             login(request,user)
 
-            dict = {}
-            dict['email'] = email
-            dict['company_name'] = company_name
-            dict['type'] = user_type
-
-            return render(request, 'profile/vendor_profile.html', dict)
+            return HttpResponseRedirect(reverse('profile'))
 
         return HttpResponseRedirect(reverse('home_page'))
 
