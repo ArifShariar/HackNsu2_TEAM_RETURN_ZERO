@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from login_signup import models as ls
 from products import models as p
 # Create your views here.
 
@@ -15,12 +15,12 @@ def products(request):
 
 
 def customers(request):
-    return render(request, 'review/customer_review.html')
-
+    dict = {}
+    dict['customers'] = list(ls.Customer.objects.all())
+    return render(request, 'review/customer_review.html' , dict)
 
 def vendors(request):
     return render(request, 'review/vendor_review.html')
-
 
 def contact(request):
     return render(request, 'others/contact.html')

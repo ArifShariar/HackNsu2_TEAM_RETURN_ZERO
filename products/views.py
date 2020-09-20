@@ -58,11 +58,11 @@ def vendor_products(request):
         products = []
 
         for i in range(len(products_raw)):
-            products.append( [products_raw[i].name, products_raw[i].amount, products_raw[i].price] )
+            products.append( [i+1, products_raw[i].name, products_raw[i].amount, products_raw[i].price] )
 
         # [ ['Pickup Truck', 5, '5000 per 100km'], ['Covered Van', 2, '10000 per 100km'] ]
 
-        dict = {'products': products}
+        dict = {'products': products, 'company_name': user.company_name}
 
         return render(request, 'products/vendor_products.html', dict)
     else:

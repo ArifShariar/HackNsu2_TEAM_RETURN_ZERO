@@ -58,6 +58,9 @@
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profile' %}">My Profile</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
                     </li>
                     {% else %}
@@ -73,31 +76,32 @@
             </div>
         </nav>
     </section>
+    <div class="container">
+      <h3 class="h3">{{company_name}}'s Inventory</h3>
+      <table class="table table-hover table-dark">
+          <thead>
+          <tr>
+              <th scope="col">#</th>
+              <th scope="col">Product Name</th>
+              <th scope="col">In Stock</th>
+              <th scope="col">Price</th>
+              <th scope="col">Edit</th>
+          </tr>
+          </thead>
+          <tbody>
+          {% for product in products %}
+          <tr>
+              <th scope="row">{{product.0}}</th> <!-- i of for loop -->
+              <td>{{product.1}}</td> <!-- change here -->
+              <td>{{product.2}}</td><!-- change here -->
+              <td>{{product.3}}</td><!-- change here -->
+              <td><button type="button" class="btn btn-warning">Edit</button></td><!-- change here -->
+          </tr>
 
-    <h3 class="h3"> Our Products </h3>
-    <table class="table table-hover table-dark">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Product Name</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Price</th>
-            <th scope="col">Edit</th>
-        </tr>
-        </thead>
-        <tbody>
-        <!-- for loop -->
-        <tr>
-            <th scope="row">i</th> <!-- i of for loop -->
-            <td>Wool</td> <!-- change here -->
-            <td>1000 ton</td><!-- change here -->
-            <td>5$ per 10 kg</td><!-- change here -->
-            <td>edit</td><!-- change here -->
-        </tr>
-
-        <!-- end loop -->
-        </tbody>
-    </table>
+          {% endfor %}
+          </tbody>
+      </table>
+    </div>
 
 </body>
 </html>

@@ -58,6 +58,9 @@
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profile' %}">My Profile</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
                     </li>
                     {% else %}
@@ -80,36 +83,32 @@
 
 <div class="container">
     <h3 class="h3"> Our Products </h3>
-    {% for i in products %}
+
+
     <div class="row">
+        {% for i in products %}
         <div class="col-md-3 col-sm-6">
             <div class="product-grid4">
                 <div class="product-image4">
                     <a href="#">
-                        <img class="pic-1" src="http://bestjquery.com/tutorial/product-grid/demo5/images/img-1.jpg"> <!--- change image link ---->
-                        <img class="pic-2" src="http://bestjquery.com/tutorial/product-grid/demo5/images/img-2.jpg">
+                        <img class="pic-1" src="{% static 'img/dress_placeholder.png' %}"> <!--- change image link ---->
+                        <img class="pic-2" src="{% static 'img/dress_placeholder.png' %}">
                     </a>
                     <ul class="social">
                         <li><a href="#" data-tip="Buy"><i class="fa fa-shopping-cart"></i></a></li>
                     </ul>
-
-                    <!-- this should be in if-else clause -->
-
-                    <!--
-                    <span class="product-new-label">New</span>
-                    <span class="product-discount-label">-10%</span>
-                    -->
-                    <!--- --->
-
                 </div>
                 <div class="product-content">
-                    <h3 class="title"><a href="#">{{i}}</a></h3>
+                    <h3 class="title"><a href="#"><strong>{{i.name}}</strong></a></h3>
+                    <h3 class="title"><a href="#">In Stock: {{i.stock}}</a></h3>
+                    <h3 class="title"><a href="#">Price: {{i.price}} Tk</a></h3>
                     <a class="add-to-cart" href="">Order</a>  <!-- ADD URL HERE -->
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
+
 </div>
 
 <!-- end for loop -->

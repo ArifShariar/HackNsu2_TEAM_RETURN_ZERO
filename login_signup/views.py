@@ -64,7 +64,7 @@ def signup_view(request):
 
             user = authenticate(username=email, password=password)
             login(request,user)
-            
+
             dict = {}
             dict['email'] = email
             dict['company_name'] = company_name
@@ -95,4 +95,35 @@ def signup_view(request):
 @login_required
 def logout_view(request):
     logout(request)
+    return HttpResponseRedirect(reverse('home_page'))
+
+@login_required
+def profile(request):
+
+    usertype, user = check_usertype(request)
+
+    if usertype.lower() == 'customer':
+
+        email = request.user.email
+        company_name = user.company_name
+
+        dict = {}
+        dict['email'] = email
+        dict['company_name'] = company_name
+        dict['type'] = usertype
+
+        return render(request, 'profile/customer_profile.html', dict)
+
+    elif usertype.lower() == 'vendor':
+
+        email = request.user.email
+        company_name = user.company_name
+
+        dict = {}
+        dict['email'] = email
+        dict['company_name'] = company_name
+        dict['type'] = usertype
+
+        return render(request, 'profile/vendor_profile.html', dict)
+
     return HttpResponseRedirect(reverse('home_page'))

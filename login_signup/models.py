@@ -8,7 +8,7 @@ class Customer(models.Model):
     company_name = models.CharField(max_length=50, null=True)
 
     def __str__(self):
-        return self.user.username
+        return self.company_name
 
 
 class Vendor(models.Model):

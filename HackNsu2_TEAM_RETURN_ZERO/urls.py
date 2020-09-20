@@ -31,5 +31,6 @@ urlpatterns = [
     path('customers', home_views.customers, name='customers'),
     path('contact', home_views.contact, name='contact'),
     path('vendor_products', product_views.vendor_products, name='vendor_products'),
-    path('add_product', product_views.add_vendor_product, name="add_product")
+    path('add_product', product_views.add_vendor_product, name="add_product"),
+    path('profile', login_signup_views.profile, name="profile"),
 ]

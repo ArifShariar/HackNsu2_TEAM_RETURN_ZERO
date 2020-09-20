@@ -70,27 +70,32 @@
 
 <div class="demo">
     <div class="container">
+
+        <p class="description">
+           Enlisted Companies
+        </p>
         <div class="row">
             <div class="col-md-12">
                 <div id="testimonial-slider" class="owl-carousel">
 
                     <!-- for loop here ---->
+                    {% for i in customers %}
                     <div class="testimonial">
                         <div class="testimonial-content">
                             <div class="testimonial-icon">
                                 <i class="fa fa-quote-left"></i>
                             </div>
-                            <p class="description">
-                               This company is very good blah blah blah.........
-                            </p>
+
                         </div>
-                        <h3 class="title">Arif</h3>
-                        <span class="post">Front End Developer</span>
+                        <h3 class="title">{{i}}</h3>
                     </div>
                     <!--- for loop end --->
+                    {% endfor %}
                 </div>
             </div>
         </div>
+
+
     </div>
 </div>
 
