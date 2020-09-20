@@ -24,3 +24,4 @@ def vendors(request):
 
 def contact(request):
     return render(request, 'others/contact.html')
+

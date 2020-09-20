@@ -36,7 +36,37 @@ def add_vendor_product(request):
 
             vendor_product.objects.create( name=product_name, amount=stock, price=price, category_fk=category_id, vendor_fk=instance )
 
-        else:
             return HttpResponseRedirect(reverse('home_page'))
+        else:
+            categories_raw = vendor_product_categories.objects.all()
+
+            categories = []
+            for c in categories_raw:
+                categories.append(c.category_name[0].upper()+c.category_name[1:])
+            dict = {'categories': categories}
+
+            return render(request, 'products/add_product.html', dict)
     else:
         return HttpResponseRedirect(reverse('home_page'))
+
+def vendor_products(request):
+    usertype, user = check_usertype(request)
+
+    if usertype == 'vendor':
+
+        products_raw = vendor_product.objects.filter(vendor_fk=user)
+        products = []
+
+        for i in range(len(products_raw)):
+            products.append( [products_raw[i].name, products_raw[i].amount, products_raw[i].price] )
+
+        # [ ['Pickup Truck', 5, '5000 per 100km'], ['Covered Van', 2, '10000 per 100km'] ]
+
+        dict = {'products': products}
+
+        return render(request, 'products/vendor_products.html', dict)
+    else:
+        return HttpResponseRedirect(reverse('home_page'))
+
+def vendor_list(request):
+        pass

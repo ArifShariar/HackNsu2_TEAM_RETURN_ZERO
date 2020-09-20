@@ -3,8 +3,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Modern Business</title>
+    <title>Modern Business: Products</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all_product.css' %}"/>
 
     <!-- Bootstrap links -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -16,6 +17,16 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+
+
+
 </head>
 <body>
 
@@ -45,7 +56,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'contact' %}">Contact</a>
                     </li>
-                     {% if user.is_authenticated %}
+                    {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
                     </li>
@@ -62,59 +73,31 @@
             </div>
         </nav>
     </section>
-<form method="post" class="form-horizontal">
-  {% csrf_token %}
-    <fieldset>
 
-        <!-- Form Name -->
-        <h1>Add Product</h1>
+    <h3 class="h3"> Our Products </h3>
+    <table class="table table-hover table-dark">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+            <th scope="col">Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- for loop -->
+        <tr>
+            <th scope="row">i</th> <!-- i of for loop -->
+            <td>Wool</td> <!-- change here -->
+            <td>1000 ton</td><!-- change here -->
+            <td>5$ per 10 kg</td><!-- change here -->
+            <td>edit</td><!-- change here -->
+        </tr>
 
-
-        <!-- Text input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="product_name">PRODUCT NAME</label>
-            <div class="col-md-4">
-                <input id="product_name" name="product_name" placeholder="NAME" class="form-control input-md" required="" type="text">
-
-            </div>
-        </div>
-
-        <!-- Text input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="product_name_fr">PRODUCT PRICE </label>
-            <div class="col-md-4">
-                <input id="product_name_fr" name="price" placeholder="PRICE" class="form-control input-md" required="" type="text">
-
-            </div>
-        </div>
-
-        <!-- Select Basic -->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="product_categorie">PRODUCT CATEGORY</label>
-            <div class="col-md-4">
-                <select id="product_categorie" name="category" class="form-control">
-                    {% for c in categories %}
-                      <option id="mens_wear" value="{{c}}">{{c}}</option>
-                    {%endfor%}
-                </select>
-            </div>
-        </div>
-
-        <!-- Text input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="available_quantity">AVAILABLE QUANTITY</label>
-            <div class="col-md-4">
-                <input id="available_quantity" name="stock" placeholder="IN STOCK" class="form-control input-md" required="" type="text">
-
-            </div>
-        </div>
-
-
-    </fieldset>
-    <button type="submit" class="btn btn-success" id="add_product">
-        Add <span class="glyphicon glyphicon-play"></span>
-      </button>
-</form>
+        <!-- end loop -->
+        </tbody>
+    </table>
 
 </body>
 </html>
