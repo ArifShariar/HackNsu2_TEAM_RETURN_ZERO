@@ -10,9 +10,11 @@ from .models import Customer, Vendor, Employee
 def check_usertype(request):
     if request.user.is_authenticated:
         if Customer.objects.filter(user=request.user.id).exists():
-            return 'customer'
+            return 'customer', Customer.objects.get(user=request.user.id)
         elif Vendor.objects.filter(user=request.user.id).exists():
-            print('vendor')
+            return 'vendor', Vendor.objects.get(user=request.user.id)
+        else:
+            return None, None
 
 # Create your views here.
 def login_view(request):
@@ -25,7 +27,17 @@ def login_view(request):
 
         if user:
             login(request,user)
-            return HttpResponseRedirect(reverse('home_page'))
+            usertype, user = check_usertype(request)
+            if check_usertype(request) == 'customer':
+                dict = {}
+                dict['email'] = email # will add company
+                dict['type'] = usertype
+                return render(request, 'profile/customer_profile.html', dict)
+            elif check_usertype(request) == 'vendor':
+                dict = {}
+                dict['email'] = email # will add company
+                dict['type'] = usertype
+                return render(request, 'profile/vendor_profile.html', dict)
         else:
             # Handle Failed Login
             return HttpResponse("Invalid login details supplied.")
@@ -48,11 +60,25 @@ def signup_view(request):
             user.save()
             customer = Customer.objects.create(company_name=company_name, user=user)
 
+            dict = {}
+            dict['email'] = email
+            dict['company_name'] = company_name
+            dict['type'] = user_type
+
+            return render(request, 'profile/customer_profile.html', dict)
+
         elif user_type.lower() == 'vendor':
             user = User.objects.create(username=email, email=email)
             user.set_password(password)
             user.save()
             vendor = Vendor.objects.create(company_name=company_name, user=user)
+
+            dict = {}
+            dict['email'] = email
+            dict['company_name'] = company_name
+            dict['type'] = user_type
+
+            return render(request, 'profile/vendor_profile.html', dict)
 
         return HttpResponseRedirect(reverse('home_page'))
 
