@@ -21,16 +21,18 @@ class vendor_product(models.Model):
 
 class company_product(models.Model):
     name = models.CharField(max_length=30)
-    amount = models.CharField(max_length=30)
+
+    price = models.IntegerField(null=True)
     stock = models.IntegerField(null=True)
+
 
     def __str__(self):
         # Built-in attribute of django.contrib.auth.models.User !
-        return self.name + " amount: "+ self.amount
+        return self.name + " Stock :"+str(self.stock)+" Price :"+str(self.price)
 
 class order(models.Model):
     order_time = models.DateField()
-    order_amount = models.IntegerField()
+    order_amount = models.IntegerField(null=True)
     customer_fk = models.ForeignKey(md.Customer , on_delete=models.DO_NOTHING, null=True)
     product_fk = models.ForeignKey(company_product, on_delete=models.DO_NOTHING, null=True)
 

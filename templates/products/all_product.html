@@ -77,8 +77,10 @@
 
 <!----- products, run for loop here ------>
 
+
 <div class="container">
     <h3 class="h3"> Our Products </h3>
+    {% for i in products %}
     <div class="row">
         <div class="col-md-3 col-sm-6">
             <div class="product-grid4">
@@ -101,15 +103,13 @@
 
                 </div>
                 <div class="product-content">
-                    <h3 class="title"><a href="#">Women's Black Top</a></h3>
-                    <div class="price">
-                        $14.4 <!-- should be dynamic -->
-                    </div>
-                    <a class="add-to-cart" href="">Buy</a>  <!-- ADD URL HERE -->
+                    <h3 class="title"><a href="#">{{i}}</a></h3>
+                    <a class="add-to-cart" href="">Order</a>  <!-- ADD URL HERE -->
                 </div>
             </div>
         </div>
     </div>
+    {% endfor %}
 </div>
 
 <!-- end for loop -->

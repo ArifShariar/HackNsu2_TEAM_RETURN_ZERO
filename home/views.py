@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-
+from products import models as p
 # Create your views here.
 
 def index(request):
@@ -8,7 +8,10 @@ def index(request):
 
 
 def products(request):
-    return render(request, 'products/all_product.html')
+    dict = {}
+    dict['products'] = list(p.company_product.objects.all())
+    print(list(p.company_product.objects.all()))
+    return render(request, 'products/all_product.html',dict)
 
 
 def customers(request):
