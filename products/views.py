@@ -36,8 +36,16 @@ def add_vendor_product(request):
 
             vendor_product.objects.create( name=product_name, amount=stock, price=price, category_fk=category_id, vendor_fk=instance )
 
-        else:
             return HttpResponseRedirect(reverse('home_page'))
+        else:
+            categories_raw = vendor_product_categories.objects.all()
+
+            categories = []
+            for c in categories_raw:
+                categories.append(c.category_name[0].upper()+c.category_name[1:])
+            dict = {'categories': categories}
+
+            return render(request, 'products/add_product.html', dict)
     else:
         return HttpResponseRedirect(reverse('home_page'))
 
@@ -61,4 +69,4 @@ def vendor_products(request):
         return HttpResponseRedirect(reverse('home_page'))
 
 def vendor_list(request):
-    
+        pass

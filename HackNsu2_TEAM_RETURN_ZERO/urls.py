@@ -30,5 +30,6 @@ urlpatterns = [
     path('vendors', home_views.vendors, name='vendors'),
     path('customers', home_views.customers, name='customers'),
     path('contact', home_views.contact, name='contact'),
-    path('vendor_products', product_views.vendor_products, name='vendor_products')
+    path('vendor_products', product_views.vendor_products, name='vendor_products'),
+    path('add_product', product_views.add_vendor_product, name="add_product")
 ]

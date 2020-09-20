@@ -62,7 +62,8 @@
             </div>
         </nav>
     </section>
-<form class="form-horizontal">
+<form method="post" class="form-horizontal">
+  {% csrf_token %}
     <fieldset>
 
         <!-- Form Name -->
@@ -73,16 +74,16 @@
         <div class="form-group">
             <label class="col-md-4 control-label" for="product_name">PRODUCT NAME</label>
             <div class="col-md-4">
-                <input id="product_name" name="product_name" placeholder="PRODUCT NAME" class="form-control input-md" required="" type="text">
+                <input id="product_name" name="product_name" placeholder="NAME" class="form-control input-md" required="" type="text">
 
             </div>
         </div>
 
         <!-- Text input-->
         <div class="form-group">
-            <label class="col-md-4 control-label" for="product_name_fr">PRODUCT DESCRIPTION </label>
+            <label class="col-md-4 control-label" for="product_name_fr">PRODUCT PRICE </label>
             <div class="col-md-4">
-                <input id="product_name_fr" name="product_name_fr" placeholder="PRODUCT DESCRIPTION" class="form-control input-md" required="" type="text">
+                <input id="product_name_fr" name="price" placeholder="PRICE" class="form-control input-md" required="" type="text">
 
             </div>
         </div>
@@ -91,9 +92,10 @@
         <div class="form-group">
             <label class="col-md-4 control-label" for="product_categorie">PRODUCT CATEGORY</label>
             <div class="col-md-4">
-                <select id="product_categorie" name="product_categorie" class="form-control">
-                    <option id="mens_wear" value="Mens Wear">Mens Wear</option>
-                    <option id="womens_wear" value="Womens Wear">Womens Wear</option>
+                <select id="product_categorie" name="category" class="form-control">
+                    {% for c in categories %}
+                      <option id="mens_wear" value="{{c}}">{{c}}</option>
+                    {%endfor%}
                 </select>
             </div>
         </div>
@@ -102,7 +104,7 @@
         <div class="form-group">
             <label class="col-md-4 control-label" for="available_quantity">AVAILABLE QUANTITY</label>
             <div class="col-md-4">
-                <input id="available_quantity" name="available_quantity" placeholder="AVAILABLE QUANTITY" class="form-control input-md" required="" type="text">
+                <input id="available_quantity" name="stock" placeholder="IN STOCK" class="form-control input-md" required="" type="text">
 
             </div>
         </div>
