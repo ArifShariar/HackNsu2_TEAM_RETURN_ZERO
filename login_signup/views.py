@@ -61,6 +61,7 @@ def signup_view(request):
             user.set_password(password)
             user.save()
             customer = Customer.objects.create(company_name=company_name, user=user)
+            customer.save()
 
             user = authenticate(username=email, password=password)
             login(request,user)
@@ -77,6 +78,7 @@ def signup_view(request):
             user.set_password(password)
             user.save()
             vendor = Vendor.objects.create(company_name=company_name, user=user)
+            vendor.save()
 
             user = authenticate(username=email, password=password)
             login(request,user)
