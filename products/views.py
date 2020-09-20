@@ -40,3 +40,25 @@ def add_vendor_product(request):
             return HttpResponseRedirect(reverse('home_page'))
     else:
         return HttpResponseRedirect(reverse('home_page'))
+
+def vendor_products(request):
+    usertype, user = check_usertype(request)
+
+    if usertype == 'vendor':
+
+        products_raw = vendor_product.objects.filter(vendor_fk=user)
+        products = []
+
+        for i in range(len(products_raw)):
+            products.append( [products_raw[i].name, products_raw[i].amount, products_raw[i].price] )
+
+        # [ ['Pickup Truck', 5, '5000 per 100km'], ['Covered Van', 2, '10000 per 100km'] ]
+
+        dict = {'products': products}
+
+        return render(request, 'products/vendor_products.html', dict)
+    else:
+        return HttpResponseRedirect(reverse('home_page'))
+
+def vendor_list(request):
+    

@@ -18,6 +18,7 @@ from django.urls import path
 
 from home import views as home_views
 from login_signup import views as login_signup_views
+from products import views as product_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,4 +30,5 @@ urlpatterns = [
     path('vendors', home_views.vendors, name='vendors'),
     path('customers', home_views.customers, name='customers'),
     path('contact', home_views.contact, name='contact'),
+    path('vendor_products', product_views.vendor_products, name='vendor_products')
 ]
