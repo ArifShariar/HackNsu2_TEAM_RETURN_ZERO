@@ -16,8 +16,9 @@ def products(request):
 
 
 def customers(request):
-    return render(request, 'review/customer_review.html')
-
+    dict = {}
+    dict['customers'] = list(Customer.objects.all())
+    return render(request, 'review/customer_review.html' , dict)
 
 def vendors(request):
     vendors = []
@@ -26,7 +27,6 @@ def vendors(request):
         vendors.append([v.company_name, v.user.email])
     dict = {'vendors':vendors}
     return render(request, 'profile/vendor_list.html', dict)
-
 
 def contact(request):
     return render(request, 'others/contact.html')
