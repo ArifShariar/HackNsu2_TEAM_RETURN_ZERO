@@ -71,13 +71,13 @@
     <div class="row">
         <div class="col-sm-12 col-md-10 col-md-offset-1">
             <table class="table table-hover">
-
-
                 <tbody>
                 <tr>
+                    <td>        </td>
+                    <td>        </td>
                     <td class="col-md-6">
                         <div class="media">
-                            <a class="thumbnail pull-left" href="#"><img class="media-object" src="#"></a>
+                            <a class="thumbnail pull-left" href=""><img class="media-object" src="{% static 'img/d_p_2.png' %}"></a>
                            <div class="media-body">
                                 <h4 class="media-heading">{{product_name}}</h4><!--- change product name -->
                                 <h5 class="media-heading"> Price : <a href="#">{{price}}</a></h5><!-- change -->
@@ -87,13 +87,12 @@
                     </td>
 
                  <!--   <td class="col-md-1 text-center"><div id="per_piece_price"><strong>4.99</strong></div> </td> -->
-
                 </tbody>
             </table>
             <form method="POST">
-                        {% csrf_token %}
-                    {{ form.as_p }}
-                        <input type="submit" class="fadeIn fourth" value="Place Order">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <input type="submit" class="btn btn-primary" value="Place Order">
             </form>
         </div>
     </div>
