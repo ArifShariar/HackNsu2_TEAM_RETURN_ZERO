@@ -216,6 +216,22 @@ def order_raw_materials(request):
                     ntfi.vendor_fk.add(vendor)
                     ntfi.save()
 
+            category_rank = category_id.rank
+
+            if category_rank<5:
+
+                target_rank = category_rank+1
+                target_category = vendor_product_categories.objects.get(rank=target_rank)
+
+                for v in Vendor.objects.all():
+                    products = vendor_product.objects.filter(vendor_fk=v, category_fk=target_category)
+
+                    if len(products)>0:
+                        noti_msg = "High Demand for Raw Materials Detected in Upstream of Supply Chain. Possibility of Rise in Demand for your Products in the Future"
+                        ntfi = notification.objects.create(type="Future Demand", noti_msg=noti_msg, issue_date=datetime.now())
+                        ntfi.vendor_fk.add(v)
+                        ntfi.save()
+
             return HttpResponseRedirect(reverse('raw_materials'))
 
         return render(request, 'products/order_raw_materials.html', dict)

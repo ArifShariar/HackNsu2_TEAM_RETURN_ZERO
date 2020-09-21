@@ -46,7 +46,7 @@ class order(models.Model):
 
 class notification(models.Model):
     noti_msg = models.CharField(max_length=1000)
-    type = models.CharField(max_length=200, null=True, choices=[("Demand", "Possible Rise in Demand Soon"), ("Bid Success", "Your Bid Has Been Accepted by Company A"), ("Relevant Bid", "Company A Has Posted A Requirement which might Interest you")])
+    type = models.CharField(max_length=200, null=True, choices=[("Future Demand", "Possible Rise in Demand Soon"), ("Bid Success", "Your Bid Has Been Accepted by Company A"), ("Relevant Bid", "Company A Has Posted A Requirement which might Interest you")])
     vendor_fk = models.ManyToManyField(md.Vendor , blank=True)
     issue_date = models.DateField(null=True)
 
