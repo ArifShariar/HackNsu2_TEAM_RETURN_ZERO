@@ -71,27 +71,23 @@
     </section>
 
 <div class="demo">
-    <div class="container">
-
+    <div class="container" >
         <p class="description">
-           Enlisted Companies
+        <h2>Enlisted Companies</h2>
         </p>
         <div class="row">
             <div class="col-md-12">
                 <div id="testimonial-slider" class="owl-carousel">
-
-                    <!-- for loop here ---->
                     {% for i in customers %}
-                    <div class="testimonial">
+                    <div class="testimonial shadow bg-white rounded" style="padding: 10px; margin-top:20px">
                         <div class="testimonial-content">
                             <div class="testimonial-icon">
                                 <i class="fa fa-quote-left"></i>
                             </div>
-
+                            <h3><a href={% url 'customer_profile_admin' i.pk %}><h3 class="=title">{{ i }}</h3></a></h3>
                         </div>
-                        <a href={% url 'customer_profile_admin' i.pk %}><h3 class="=title">{{ i }}</h3></a>
+
                     </div>
-                    <!--- for loop end --->
                     {% endfor %}
                 </div>
             </div>
