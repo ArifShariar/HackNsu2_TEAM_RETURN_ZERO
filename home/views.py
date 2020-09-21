@@ -66,18 +66,20 @@ def order_view(request , pk):
     if not usertype.lower() == 'customer':
         return HttpResponseRedirect(reverse('products'))
 
+
     if request.method == 'POST':
+
         amount = request.POST.get('amount')
-        # amount= Int(amount)
         prod = p.company_product.objects.get(pk=pk)
+        prod.stock = prod.stock - int(amount)
+        prod.save()
+
         customer = list(ls.Customer.objects.filter(user=request.user))[0]
-        place_order(prod, amount, customer)
+        place_order(prod , amount , customer)
 
         ntfi_msg = '"Product: {} " , "Quantity {}"'.format(prod.name, amount)
-        company_notification.objects.create(noti_msg=ntfi_msg, type="New Order", customer_fk=customer,
-                                            issue_date=datetime.datetime.now())
+        company_notification.objects.create(noti_msg=ntfi_msg, type="New Order", customer_fk=customer, issue_date=datetime.datetime.now())
 
-        print("orderplaced")
         return HttpResponseRedirect(reverse('order_history'))
 
     dict = {}
@@ -156,7 +158,7 @@ def customer_order_history_admin(request , pk):
         dict['customer_name'] = cust_obj
 
         return render(request, 'order/customer_order_history.html', dict)
-    
+
 def customer_profile_admin(request , pk):
     usertype, user = check_usertype(request)
     if usertype.lower() == 'admin':

@@ -105,7 +105,11 @@
                     <h3 class="title"><a href="#"><strong>{{i.name}}</strong></a></h3>
                     <h3 class="title"><a href="#">In Stock: {{i.stock}}</a></h3>
                     <h3 class="title"><a href="#">Price: {{i.price}} Tk</a></h3>
-                    <a class="add-to-cart" href="{% url 'orderview' i.pk %}">Order</a>  <!-- ADD URL HERE -->
+                    {% if i.stock <= 0 %}
+                      <h3 class="title" style="color: #d9534f"><strong>Out of Stock</strong></h3>
+                    {% else %}
+                      <a class="add-to-cart" href="{% url 'orderview' i.pk %}">Order</a>  <!-- ADD URL HERE -->
+                    {% endif %}
                 </div>
             </div>
         </div>
