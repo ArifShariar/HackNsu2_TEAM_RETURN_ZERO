@@ -10,7 +10,7 @@
     </div>
     <form method="post">
       {% csrf_token %}
-      <input type="text" id="email" class="fadeIn second" name="email" placeholder="Email">
+      <input style="margin-top: 50px" type="text" id="email" class="fadeIn second" name="email" placeholder="Email">
       <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password">
       <input type="submit" class="fadeIn fourth" value="Log In">
     </form>
@@ -18,7 +18,7 @@
       <a class="underlineHover" href="{% url 'signup' %}">Sign Up</a>
     </div>
       <div id="formFooter">
-      <a class="underlineHover" href="#">Forgot Password?</a>
+      <a class="underlineHover" href="{% url 'contact' %}">Forgot Password?</a>
     </div>
 
   </div>

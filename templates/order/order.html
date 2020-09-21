@@ -67,42 +67,42 @@
             </div>
         </nav>
     </section>
-<div class="container">
+<div class="container d-flex justify-content-center" style="margin-top: 30px">
     <div class="row">
-        <div class="col-sm-12 col-md-10 col-md-offset-1">
+        <div class="col-12 shadow-lg p-3 mb-5 bg-white rounded">
             <table class="table table-hover">
                 <tbody>
                 <tr>
-                    <td>        </td>
-                    <td>        </td>
                     <td class="col-md-6">
                         <div class="media">
-                            <a class="thumbnail pull-left" href=""><img class="media-object" src="{% static 'img/d_p_2.png' %}"></a>
-                           <div class="media-body">
+                          <a class="thumbnail pull-left" href=""><img class="media-object" src="{% static 'img/d_p_3.jpg' %}"></a>
+                           <div class="media-body" style="margin-left: 20px">
                                 <h4 class="media-heading">{{product_name}}</h4><!--- change product name -->
                                 <h5 class="media-heading"> Price : <a href="#">{{price}}</a></h5><!-- change -->
                                 <span>Stock: </span><span class="text-warning"><strong>{{stock}}</strong></span><!-- change -->
                             </div>
                         </div>
                     </td>
-
+                  </tr>
                  <!--   <td class="col-md-1 text-center"><div id="per_piece_price"><strong>4.99</strong></div> </td> -->
                 </tbody>
             </table>
-            <form method="POST">
-              {% csrf_token %}
-              {{ form.as_p }}
-              <input type="submit" class="btn btn-primary" value="Place Order">
-            </form>
+            <div class="d-flex justify-content-center">
+              <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input style="margin-left:70px" type="submit" class="btn btn-dark" value="Place Order">
+              </form>
+            </div>
         </div>
     </div>
 </div>
 </body>
 
 <script>
-    document.getElementById('id_amount').max= {{stock}}
-    document.getElementById('id_amount').min= 1
-    document.getElementById('id_amount').style.width = "100px"
+    document.getElementById('id_order_quantity').max= {{stock}}
+    document.getElementById('id_order_quantity').min= 1
+    document.getElementById('id_order_quantity').style.width = "120px"
     function updatePrice() {
         var amount = document.getElementById("quantity").value;
         var per_piece_p = document.getElementById("per_piece_price").value;
