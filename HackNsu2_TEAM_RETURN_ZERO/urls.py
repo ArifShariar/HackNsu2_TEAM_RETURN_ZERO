@@ -33,4 +33,16 @@ urlpatterns = [
     path('vendor_products', product_views.vendor_products, name='vendor_products'),
     path('add_product', product_views.add_vendor_product, name="add_product"),
     path('profile', login_signup_views.profile, name="profile"),
+
+    path('order/<int:pk>' , home_views.order_view , name='orderview'),
+    path('orderhistory' , home_views.customer_order_history_view , name='order_history'),
+
+
+    path('vendor_public_profile/<vendor_user_id>', home_views.vendor_public_profile, name='vendor_public_profile'),
+    path('order', home_views.order, name="order"),
+    path('raw_materials', product_views.raw_materials, name='raw_materials'),
+    path('order_raw_materials', product_views.order_raw_materials, name='order_raw_materials'),
+    path('bids/<int:req_id>', product_views.bids_view, name="bids_view"),
+    path('notifications', login_signup_views.vendor_notifications, name="vendor_notifications"),
+    path('company_notifications', login_signup_views.companyA_notifications, name="companyAnotifications"),
 ]

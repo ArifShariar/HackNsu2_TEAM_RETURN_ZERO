@@ -6,6 +6,7 @@ from django.shortcuts import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Customer, Vendor, Employee
+from products.models import *
 
 def check_usertype(request):
     if request.user.is_authenticated:
@@ -13,6 +14,10 @@ def check_usertype(request):
             return 'customer', Customer.objects.get(user=request.user.id)
         elif Vendor.objects.filter(user=request.user.id).exists():
             return 'vendor', Vendor.objects.get(user=request.user.id)
+        elif Employee.objects.filter(user=request.user.id).exists():
+            return 'employee', Employee.objects.get(user=request.user.id)
+        elif request.user.username == 'return_zero':
+            return 'admin', ' '
         else:
             return ' ', ' '
     else:
@@ -98,6 +103,10 @@ def profile(request):
         dict['company_name'] = company_name
         dict['type'] = usertype
 
+        dict['vendor_personal'] = False
+        dict['companyA'] = False
+        dict['raw_materials'] = False
+
         return render(request, 'profile/customer_profile.html', dict)
 
     elif usertype.lower() == 'vendor':
@@ -110,6 +119,36 @@ def profile(request):
         dict['company_name'] = company_name
         dict['type'] = usertype
 
+        dict['vendor_personal'] = True
+        dict['companyA'] = False
+
+        public_products = vendor_product.objects.filter(vendor_fk=user, public=True)
+        dict['public_products'] = public_products
+        dict['raw_materials'] = True
+
         return render(request, 'profile/vendor_profile.html', dict)
 
+    elif usertype.lower() == 'admin' or usertype.lower() == 'employee':
+        return HttpResponseRedirect(reverse('admin:index'))
+
     return HttpResponseRedirect(reverse('home_page'))
+
+def vendor_notifications(request):
+    usertype, vendor = check_usertype(request)
+
+    if usertype.lower() == 'vendor':
+
+        dict = {}
+        dict['ntfi'] = notification.objects.filter(vendor_fk=vendor).order_by('issue_date')
+
+        return render(request, 'profile/vendor_notifications.html', dict)
+    else:
+        return HttpResponseRedirect(reverse('home_page'))
+
+def companyA_notifications(request):
+    usertype, _ = check_usertype(request)
+
+    if usertype == 'admin' or usertype == 'employee':
+        return render(request, 'products/companyAnotifications.html')
+    else:
+        return HttpResponseRedirect(reverse('home_page'))
