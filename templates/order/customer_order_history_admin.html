@@ -71,7 +71,7 @@
         </nav>
     </section>
     <div class="container">
-        <h3>Order History of {{ customer_name }}</h3>
+        <h3 style="margin-top: 40px; margin-bottom: 40px; color: #f7f7f7"><strong>Order History of {{ customer_name }}</strong></h3>
 
             <table class="table table-bordered table-dark">
               <thead>
@@ -90,14 +90,16 @@
                           <td>{{ i.order_time }}</td>
                           <td>{{ i.order_amount }}</td>
                           <td>{{ i.product_fk.name }}</td>
-                            <td>{{ i.status }}</td>
-                            <td>
-                            <form method="POST">
-                                {% csrf_token %}
-                                 {{ form.as_p }}
-                                <input type="hidden"  name="kotono" value="{{forloop.counter}}">
-                                <input type="submit" class="fadeIn fourth" value="Submit">
-                            </form>
+                          <td>{{ i.status }}</td>
+                          <td style="text-align: center; vertical-align: middle">
+                            {% if not i.status == 'Delivered' %}
+                              <form method="POST">
+                                  {% csrf_token %}
+                                   {{ form.as_p }}
+                                  <input type="hidden"  name="kotono" value="{{forloop.counter}}">
+                                  <input type="submit" class="fadeIn fourth" value="Submit">
+                              </form>
+                            {% endif %}
                           </td>
                         </tr>
                   {% endfor %}
@@ -105,5 +107,23 @@
             </table>
 
     </div>
+    <script type="text/javascript">
+      var buttons = document.getElementsByClassName('fadeIn fourth')
+      for( var i=0; i<buttons.length; i++ ) {
+        buttons[i].value = "Mark Delivered"
+        buttons[i].classList.add("btn");
+        buttons[i].classList.add("btn-light");
+      }
+      var checkboxes = document.getElementsByName('delivered')
+      for( var i=0; i<checkboxes.length; i++ ) {
+        checkboxes[i].checked = true
+        checkboxes[i].style.display = "none"
+      }
+      var labels = document.getElementsByTagName('label')
+      for( var i=0; i<checkboxes.length; i++ ) {
+        labels[i].style.display = "none"
+      }
+
+    </script>
 </body>
 </html>
