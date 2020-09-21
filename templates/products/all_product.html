@@ -6,6 +6,7 @@
     <title>Modern Business: Products</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/all_product.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}">
 
     <!-- Bootstrap links -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -53,9 +54,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'products' %}">Products</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
-                    </li>
+                    {% if raw_materials %}
+                      <li class="nav-item">
+                          <a class="nav-link" href="{% url 'raw_materials' %}">Raw Materials</a>
+                      </li>
+                    {% endif %}
                     {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'profile' %}">My Profile</a>
@@ -102,7 +105,7 @@
                     <h3 class="title"><a href="#"><strong>{{i.name}}</strong></a></h3>
                     <h3 class="title"><a href="#">In Stock: {{i.stock}}</a></h3>
                     <h3 class="title"><a href="#">Price: {{i.price}} Tk</a></h3>
-                    <a class="add-to-cart" href="">Order</a>  <!-- ADD URL HERE -->
+                    <a class="add-to-cart" href="{% url 'orderview' i.pk %}">Order</a>
                 </div>
             </div>
         </div>
@@ -113,6 +116,12 @@
 
 <!-- end for loop -->
 <hr>
+
+<script>
+    function openForm(){
+        alert("Order FORM")
+    }
+</script>
 
 
 </body>

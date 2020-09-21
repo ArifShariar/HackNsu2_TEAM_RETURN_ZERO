@@ -47,9 +47,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'products' %}">Products</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
-                    </li>
+                    {% if raw_materials %}
+                      <li class="nav-item">
+                          <a class="nav-link" href="{% url 'raw_materials' %}">Raw Materials</a>
+                      </li>
+                    {% endif %}
                     {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'profile' %}">My Profile</a>
@@ -85,7 +87,7 @@
             <div class="col-md-6">
                 <div class="profile-head">
                     <h6>
-                        Team Return Zero <!-- should be user.company_name -->
+                        {{ company_name }} <!-- should be user.company_name -->
                     </h6>
                  <!--   <p class="proile-rating">RANKINGS : <span>8/10</span></p> -->
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -108,7 +110,7 @@
                     <a href="">CONTACT US</a><br/>
                     <a href="">FAQ</a>
 
-                    <a href="">YOUR ORDERS</a><br/>
+                    <a href={% url 'order_history' %}>YOUR ORDERS</a><br/>
                 </div>
             </div>
 

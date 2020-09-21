@@ -53,9 +53,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'products' %}">Products</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
-                    </li>
+                    {% if raw_materials %}
+                      <li class="nav-item">
+                          <a class="nav-link" href="{% url 'raw_materials' %}">Raw Materials</a>
+                      </li>
+                    {% endif %}
                     {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'profile' %}">My Profile</a>
@@ -85,6 +87,7 @@
               <th scope="col">Product Name</th>
               <th scope="col">In Stock</th>
               <th scope="col">Price</th>
+              <th scope="col">Publicly Visible</th>
               <th scope="col">Edit</th>
           </tr>
           </thead>
@@ -95,6 +98,7 @@
               <td>{{product.1}}</td> <!-- change here -->
               <td>{{product.2}}</td><!-- change here -->
               <td>{{product.3}}</td><!-- change here -->
+              <td>{{product.4}}</td><!-- change here -->
               <td><button type="button" class="btn btn-warning">Edit</button></td><!-- change here -->
           </tr>
 
