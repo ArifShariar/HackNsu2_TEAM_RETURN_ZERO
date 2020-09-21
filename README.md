@@ -26,6 +26,9 @@ Run this project:<br>
 If you want to log in as customer/vendor, copy any email and password is testpass1234
 </p>
 <hr>
+<h2>System Architecture: </h2><br>
+<img src="static/img/HackNsu.png">
+<br>
 <h3>Team Return Zero Members: </h3>
 <h4>1. <a href="https://github.com/NazmulTakbir">Nazmul Takbir</a></h4>
 <h4>2. <a href="https://github.com/AfnanCSE98">Sihat Afnan </a></h4>
