@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modern Business: Products</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all_product.css' %}"/>
+
+    <!-- Bootstrap links -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- font awesome cdn -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" >
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+
+
+
+</head>
+<body>
+
+<!-- Nav bar -->
+    <section id="nav-bar">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+            <a class="navbar-brand" href="#"><img src="{% static 'img/logo.png' %}"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home_page' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'vendors' %}">Vendors</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'customers' %}">Customers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'products' %}">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'raw_materials' %}">Raw Materials</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profile' %}">My Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+                    </li>
+                    {% endif %}
+
+                </ul>
+            </div>
+        </nav>
+    </section>
+
+    <div class="container">
+      <h4 style="margin-top: 50px">Notifications: </h4></br>
+      <table class="table table-hover table-dark">
+          <thead>
+          <tr>
+            <th scope="col" style="border: 1px solid #f7f7f7">Notification Type</th>
+            <th scope="col" style="border: 1px solid #f7f7f7">Details</th>
+            <th scope="col" style="border: 1px solid #f7f7f7">Issue Date</th>
+          </tr>
+          </thead>
+          <tbody>
+          {% for n in ntfi %}
+          <tr>
+              <td style="border: 1px solid #f7f7f7">{{n.type}}</td> <!-- change here -->
+              <td style="border: 1px solid #f7f7f7">{{n.noti_msg}}</td> <!-- change here -->
+              <td style="border: 1px solid #f7f7f7">{{n.issue_date}}</td> <!-- change here -->
+          </tr>
+          {% endfor %}
+          <tr>
+              <td style="border: 1px solid #f7f7f7"></td> <!-- change here -->
+              <td style="border: 1px solid #f7f7f7"></td> <!-- change here -->
+              <td style="border: 1px solid #f7f7f7"></td> <!-- change here -->
+          </tr>
+          </tbody>
+      </table>
+    </div>
+</body>
+</html>

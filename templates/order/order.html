@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modern Business</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- Bootstrap links -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- font awesome cdn -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" >
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body onload="updatePrice()">
+
+<!-- Nav bar -->
+    <section id="nav-bar">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+            <!-- download link  https://getbootstrap.com/docs/4.5/components/navbar/ -->
+            <a class="navbar-brand" href="#"><img src="{% static 'img/logo.png' %}"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home_page' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'vendors' %}">Vendors</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'customers' %}">Customers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'products' %}">Products</a>
+                    </li>
+                    {% if raw_materials %}
+                      <li class="nav-item">
+                          <a class="nav-link" href="{% url 'raw_materials' %}">Raw Materials</a>
+                      </li>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profile' %}">My Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+                    </li>
+                    {% endif %}
+
+                </ul>
+            </div>
+        </nav>
+    </section>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-10 col-md-offset-1">
+            <table class="table table-hover">
+
+
+                <tbody>
+                <tr>
+                    <td class="col-md-6">
+                        <div class="media">
+                            <a class="thumbnail pull-left" href="#"><img class="media-object" src="#"></a>
+                           <div class="media-body">
+                                <h4 class="media-heading">{{product_name}}</h4><!--- change product name -->
+                                <h5 class="media-heading"> Price : <a href="#">{{price}}</a></h5><!-- change -->
+                                <span>Stock: </span><span class="text-warning"><strong>{{stock}}</strong></span><!-- change -->
+                            </div>
+                        </div>
+                    </td>
+
+                 <!--   <td class="col-md-1 text-center"><div id="per_piece_price"><strong>4.99</strong></div> </td> -->
+
+                </tbody>
+            </table>
+            <form method="POST">
+                        {% csrf_token %}
+                    {{ form.as_p }}
+                        <input type="submit" class="fadeIn fourth" value="Place Order">
+                    </form>
+        </div>
+    </div>
+</div>
+</body>
+
+<script>
+    function updatePrice() {
+        var amount = document.getElementById("quantity").value;
+        var per_piece_p = document.getElementById("per_piece_price").value;
+        var am = parseInt(amount);
+        var p_p = parseFloat(per_piece_p);
+        var total_price = am * p_p;
+
+        document.getElementById("total_price").value = total_price;
+        document.getElementById("total_price_final").value = total_price;
+
+        // document.getElementById("total_price").innerHTML = "<p>" + total_price + "</p>";
+
+    }
+</script>
+</html>
