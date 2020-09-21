@@ -65,59 +65,62 @@
             </div>
         </nav>
     </section>
-<form method="post" class="form-horizontal">
-  {% csrf_token %}
-    <fieldset>
+<div class="container">
+    <form method="post" class="form-horizontal">
+      {% csrf_token %}
+        <fieldset>
 
-        <!-- Form Name -->
-        <h1>Add Product</h1>
+            <!-- Form Name -->
+            <h1>Add Product</h1>
 
 
-        <!-- Text input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="product_name">PRODUCT NAME</label>
-            <div class="col-md-4">
-                <input id="product_name" name="product_name" placeholder="NAME" class="form-control input-md" required="" type="text">
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="product_name">PRODUCT NAME</label>
+                <div class="col-md-4">
+                    <input id="product_name" name="product_name" placeholder="NAME" class="form-control input-md" required="" type="text">
 
+                </div>
             </div>
-        </div>
 
-        <!-- Text input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="product_name_fr">PRODUCT PRICE </label>
-            <div class="col-md-4">
-                <input id="product_name_fr" name="price" placeholder="PRICE" class="form-control input-md" required="" type="text">
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="product_name_fr">PRODUCT PRICE </label>
+                <div class="col-md-4">
+                    <input id="product_name_fr" name="price" placeholder="PRICE" class="form-control input-md" required="" type="text">
 
+                </div>
             </div>
-        </div>
 
-        <!-- Select Basic -->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="product_categorie">PRODUCT CATEGORY</label>
-            <div class="col-md-4">
-                <select id="product_categorie" name="category" class="form-control">
-                    {% for c in categories %}
-                      <option id="mens_wear" value="{{c}}">{{c}}</option>
-                    {%endfor%}
-                </select>
+            <!-- Select Basic -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="product_categorie">PRODUCT CATEGORY</label>
+                <div class="col-md-4">
+                    <select id="product_categorie" name="category" class="form-control">
+                        {% for c in categories %}
+                          <option id="mens_wear" value="{{c}}">{{c}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
             </div>
-        </div>
 
-        <!-- Text input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="available_quantity">AVAILABLE QUANTITY</label>
-            <div class="col-md-4">
-                <input id="available_quantity" name="stock" placeholder="IN STOCK" class="form-control input-md" required="" type="text">
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="available_quantity">AVAILABLE QUANTITY</label>
+                <div class="col-md-4">
+                    <input id="available_quantity" name="stock" placeholder="IN STOCK" class="form-control input-md" required="" type="text">
 
+                </div>
             </div>
-        </div>
 
 
-    </fieldset>
-    <button type="submit" class="btn btn-success" id="add_product">
-        Add <span class="glyphicon glyphicon-play"></span>
-      </button>
-</form>
+        </fieldset>
+        <button type="submit" class="btn btn-success" id="add_product">
+            Add <span class="glyphicon glyphicon-play"></span>
+          </button>
+    </form>
+
+</div>
 
 </body>
 </html>
