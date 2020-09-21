@@ -1,5 +1,6 @@
 from django.shortcuts import render
-
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import reverse
 from login_signup import models as ls
 from login_signup.models import *
 from products.models import *
@@ -55,12 +56,21 @@ def place_order(product_obj, amount, customer_obj):
     order.save();
 
 def order_view(request , pk):
+
+    usertype, _ = check_usertype(request)
+    if not usertype.lower() == 'customer':
+        return HttpResponseRedirect(reverse('products'))
+
     if request.method == 'POST':
         amount = request.POST.get('amount')
          #amount= Int(amount)
         prod = p.company_product.objects.get(pk = pk)
         customer = list(ls.Customer.objects.filter(user=request.user))[0]
         place_order(prod , amount , customer)
+
+        ntfi_msg = '"Product: {} " , "Quantity {}"'.format(prod.name, amount)
+        company_notification.objects.create(noti_msg=ntfi_msg, type="New Order", customer_fk=customer, issue_date=datetime.datetime.now())
+
         print("orderplaced")
         #print(amount)
     dict = {}

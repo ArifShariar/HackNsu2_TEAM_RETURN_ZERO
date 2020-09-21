@@ -53,6 +53,16 @@ class notification(models.Model):
     def __str__(self):
         return self.noti_msg
 
+class company_notification(models.Model):
+    noti_msg = models.CharField(max_length=1000)
+    type = models.CharField(max_length=200, null=True, choices=[("New Bid", "New Bid"), ("New Order", "New Order")])
+    vendor_fk = models.ForeignKey(md.Vendor , on_delete=models.DO_NOTHING, null=True, blank=True)
+    customer_fk = models.ForeignKey(md.Customer , on_delete=models.DO_NOTHING, null=True, blank=True)
+    issue_date = models.DateField(null=True)
+
+    def __str__(self):
+        return self.noti_msg
+
 class raw_material_requirments(models.Model):
     description = models.CharField(max_length=1000)
     quantity = models.CharField(max_length=50)
