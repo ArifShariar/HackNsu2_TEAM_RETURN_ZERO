@@ -63,6 +63,18 @@ def order_view(request , pk):
         place_order(prod , amount , customer)
         print("orderplaced")
         #print(amount)
+    dict = {}
+    pob = p.company_product.objects.get(pk = pk)
+    dict['product_name'] = pob.name
+    dict['price'] = pob.price
+    dict['stock'] = pob.stock
+    dict['form'] = orderForm
+    dict['raw_materials'] = False
+    usertype,_ = check_usertype(request)
+
+    if usertype.lower() == 'vendor' or usertype.lower()=='admin' or usertype.lower()=='employee':
+        dict['raw_materials'] = True
+    return render(request, 'order/order.html', dict)
 
 
     dict = {}
