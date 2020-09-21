@@ -94,13 +94,16 @@
                         {% csrf_token %}
                     {{ form.as_p }}
                         <input type="submit" class="fadeIn fourth" value="Place Order">
-                    </form>
+            </form>
         </div>
     </div>
 </div>
 </body>
 
 <script>
+    document.getElementById('id_amount').max= {{stock}}
+    document.getElementById('id_amount').min= 1
+    document.getElementById('id_amount').style.width = "100px"
     function updatePrice() {
         var amount = document.getElementById("quantity").value;
         var per_piece_p = document.getElementById("per_piece_price").value;
