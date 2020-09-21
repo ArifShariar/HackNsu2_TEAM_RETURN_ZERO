@@ -1,13 +1,18 @@
 from django.shortcuts import render
-
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import reverse
 from login_signup import models as ls
 from login_signup.models import *
 from products.models import *
 from .forms import orderForm
 from products import models as p
 import datetime
+
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+
+
+
 # Create your views here.
 
 def check_usertype(request):
@@ -25,6 +30,7 @@ def check_usertype(request):
     else:
         return ' ', ' '
 
+
 def index(request):
     usertype, _ = check_usertype(request)
 
@@ -37,7 +43,6 @@ def index(request):
 
 
 def products(request):
-
     dict = {}
     dict['raw_materials'] = False
 
@@ -52,16 +57,22 @@ def products(request):
 
 def place_order(product_obj, amount, customer_obj):
     time = datetime.date.today()
-    order = p.order.objects.create(order_time=time, order_amount=amount, customer_fk=customer_obj, product_fk=product_obj)
+    order = p.order.objects.create(order_time=time, order_amount=amount, customer_fk=customer_obj,
+                                   product_fk=product_obj)
     order.save();
 
 def order_view(request , pk):
+
     usertype, user = check_usertype(request)
     if request.method == 'POST' and usertype.lower() == 'customer':
         amount = request.POST.get('amount')
         prod = p.company_product.objects.get(pk = pk)
         customer = list(ls.Customer.objects.filter(user=request.user))[0]
         place_order(prod , amount , customer)
+        ntfi_msg = '"Product: {} " , "Quantity {}"'.format(prod.name, amount)
+        company_notification.objects.create(noti_msg=ntfi_msg, type="New Order", customer_fk=customer,
+                                            issue_date=datetime.datetime.now())
+
         print("orderplaced")
         return HttpResponseRedirect(reverse('order_history'))
     dict = {}
@@ -79,15 +90,14 @@ def order_view(request , pk):
 
 
 
-
 def customer_order_history_view(request):
     cust_obj = list(ls.Customer.objects.filter(user=request.user))[0]
-    #print(cust_obj)
-    orders = list(p.order.objects.filter(customer_fk = cust_obj))
-    dict={}
+    # print(cust_obj)
+    orders = list(p.order.objects.filter(customer_fk=cust_obj))
+    dict = {}
     dict['order_list'] = orders
     dict['customer_name'] = cust_obj
-    return render(request, 'order/customer_order_history.html' , dict)
+    return render(request, 'order/customer_order_history.html', dict)
 
 
 def customers(request):
@@ -155,7 +165,7 @@ def vendors(request):
     vendors_raw = Vendor.objects.all()
     for v in vendors_raw:
         vendors.append([v.company_name, v.user.email, v.user.id])
-    dict = {'vendors':vendors}
+    dict = {'vendors': vendors}
 
     dict['raw_materials'] = False
     usertype, _ = check_usertype(request)
@@ -166,7 +176,6 @@ def vendors(request):
 
 
 def contact(request):
-
     dict = {}
 
     dict['raw_materials'] = False
@@ -176,8 +185,8 @@ def contact(request):
 
     return render(request, 'others/contact.html', dict)
 
-def vendor_public_profile(request, vendor_user_id):
 
+def vendor_public_profile(request, vendor_user_id):
     user = User.objects.get(id=vendor_user_id)
     vendor = Vendor.objects.get(user=user)
 

@@ -82,16 +82,18 @@
           <thead>
           <tr>
               <th scope="col">Customer Name</th>
-              <th scope="col">Order Details</th>
+              <th scope="col">Notification Type</th>
+              <th scope="col">Details</th>
               <th scope="col">Date Issued</th>
           </tr>
           </thead>
           <tbody>
-          {% for product in products %}
+          {% for n in c_n %}
           <tr>
-              <td>{{product.1}}</td> <!-- change here -->
-              <td>{{product.2}}</td><!-- change here -->
-              <td>{{product.3}}</td><!-- change here -->
+            <td>{{n.customer_fk.company_name}}</td> <!-- change here -->
+            <td>{{n.type}}</td><!-- change here -->
+            <td>{{n.noti_msg}}</td><!-- change here -->
+            <td>{{n.issue_date}}</td><!-- change here -->
           </tr>
 
           {% endfor %}
@@ -116,12 +118,12 @@
           </tr>
           </thead>
           <tbody>
-          {% for product in products %}
+          {% for n in v_n %}
           <tr>
-              <td>{{product.1}}</td> <!-- change here -->
-              <td>{{product.2}}</td><!-- change here -->
-              <td>{{product.3}}</td><!-- change here -->
-              <td>{{product.3}}</td><!-- change here -->
+              <td>{{n.vendor_fk.company_name}}</td> <!-- change here -->
+              <td>{{n.type}}</td><!-- change here -->
+              <td>{{n.noti_msg}}</td><!-- change here -->
+              <td>{{n.issue_date}}</td><!-- change here -->
           </tr>
 
           {% endfor %}

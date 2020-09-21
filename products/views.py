@@ -105,6 +105,9 @@ def raw_materials(request):
                 else:
                     bid_details.objects.create(vendor_fk=vendor, req_fk=req, proposal=proposal)
 
+                ntfi_msg = '"Proposal: {} " for "Requirement {}"'.format(proposal, req.description)
+                company_notification.objects.create(noti_msg=ntfi_msg, type="New Bid", vendor_fk=vendor, issue_date=datetime.now())
+
                 return HttpResponseRedirect(reverse('raw_materials'))
 
             elif form_type.lower() == 'check':

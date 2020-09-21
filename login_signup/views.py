@@ -149,6 +149,16 @@ def companyA_notifications(request):
     usertype, _ = check_usertype(request)
 
     if usertype == 'admin' or usertype == 'employee':
-        return render(request, 'products/companyAnotifications.html')
+
+        v_n = company_notification.objects.filter(customer_fk=None)
+        c_n = company_notification.objects.filter(vendor_fk=None)
+
+        dict = {}
+        dict['v_n'] = v_n
+        dict['c_n'] = c_n
+
+        print(v_n)
+
+        return render(request, 'products/companyAnotifications.html', dict)
     else:
         return HttpResponseRedirect(reverse('home_page'))
