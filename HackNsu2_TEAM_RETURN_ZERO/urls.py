@@ -37,6 +37,9 @@ urlpatterns = [
     path('order/<int:pk>' , home_views.order_view , name='orderview'),
     path('orderhistory' , home_views.customer_order_history_view , name='order_history'),
 
+    path('profile_admin/<int:pk>' , home_views.customer_profile_admin , name='customer_profile_admin'),
+    path('profile_orders_admin/<int:pk>' , home_views.customer_order_history_admin , name='customer_order_history_admin'),
+
 
     path('vendor_public_profile/<vendor_user_id>', home_views.vendor_public_profile, name='vendor_public_profile'),
     path('order', home_views.order, name="order"),
