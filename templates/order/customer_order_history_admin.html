@@ -81,6 +81,7 @@
                       <th scope="col">Amount</th>
                       <th scope="col">Product</th>
                       <th scope="col">Status</th>
+                      <th scope="col">Is Delivered?</th>
                 </tr>
               </thead>
                   <tbody>
@@ -89,7 +90,15 @@
                           <td>{{ i.order_time }}</td>
                           <td>{{ i.order_amount }}</td>
                           <td>{{ i.product_fk.name }}</td>
-                          <td>{{ i.status }}</td>
+                            <td>{{ i.status }}</td>
+                            <td>
+                            <form method="POST">
+                                {% csrf_token %}
+                                 {{ form.as_p }}
+                                <input type="hidden"  name="kotono" value="{{forloop.counter}}">
+                                <input type="submit" class="fadeIn fourth" value="Submit">
+                            </form>
+                          </td>
                         </tr>
                   {% endfor %}
                   </tbody>

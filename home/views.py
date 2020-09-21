@@ -4,7 +4,7 @@ from django.shortcuts import reverse
 from login_signup import models as ls
 from login_signup.models import *
 from products.models import *
-from .forms import orderForm
+from .forms import orderForm,deliveredForm
 from products import models as p
 import datetime
 
@@ -62,17 +62,15 @@ def place_order(product_obj, amount, customer_obj):
     order.save();
 
 def order_view(request , pk):
-
     usertype, _ = check_usertype(request)
     if not usertype.lower() == 'customer':
         return HttpResponseRedirect(reverse('products'))
 
+
     if request.method == 'POST':
 
         amount = request.POST.get('amount')
-
         prod = p.company_product.objects.get(pk=pk)
-
         prod.stock = prod.stock - int(amount)
         prod.save()
 
@@ -82,7 +80,7 @@ def order_view(request , pk):
         ntfi_msg = '"Product: {} " , "Quantity {}"'.format(prod.name, amount)
         company_notification.objects.create(noti_msg=ntfi_msg, type="New Order", customer_fk=customer, issue_date=datetime.datetime.now())
 
-        return HttpResponseRedirect(reverse('products'))
+        return HttpResponseRedirect(reverse('order_history'))
 
     dict = {}
     pob = p.company_product.objects.get(pk=pk)
@@ -96,6 +94,7 @@ def order_view(request , pk):
     if usertype.lower() == 'vendor' or usertype.lower() == 'admin' or usertype.lower() == 'employee':
         dict['raw_materials'] = True
     return render(request, 'order/order.html', dict)
+
 
 def customer_order_history_view(request):
     cust_obj = list(ls.Customer.objects.filter(user=request.user))[0]
@@ -120,14 +119,34 @@ def customers(request):
 
 ### admin views for customer here
 def customer_order_history_admin(request , pk):
+    cust_obj = ls.Customer.objects.get(pk=pk)
+    orders = list(p.order.objects.filter(customer_fk=cust_obj))
+    dict = {}
+    dict['order_list'] = orders
+    dict['customer_name'] = cust_obj
+    dict['form'] = deliveredForm
+
     usertype, user = check_usertype(request)
     if usertype.lower() == 'admin':
-        cust_obj = ls.Customer.objects.get(pk = pk)
-        #print(cust_obj)
-        orders = list(p.order.objects.filter(customer_fk = cust_obj))
-        dict={}
-        dict['order_list'] = orders
-        dict['customer_name'] = cust_obj
+        form = deliveredForm(request.POST or None)
+        if request.method == 'POST' and form.is_valid():
+
+            kotono = int(request.POST.get('kotono'))
+            print(type(kotono))
+            is_delivered = form.cleaned_data['delivered']
+            if is_delivered:
+                c=1
+                for i in orders:
+                    if c == kotono:
+                        i.status = 'Delivered'
+                        i.save()
+                        print(i.status)
+                        break
+                    c=c+1
+                return HttpResponseRedirect(reverse('customer_order_history_admin',args=[cust_obj.pk]))
+                #return render(request, 'order/customer_order_history_admin.html', dict)
+
+
         return render(request, 'order/customer_order_history_admin.html' , dict)
 
     elif usertype.lower() == 'customer':
@@ -137,6 +156,7 @@ def customer_order_history_admin(request , pk):
         dict = {}
         dict['order_list'] = orders
         dict['customer_name'] = cust_obj
+
         return render(request, 'order/customer_order_history.html', dict)
 
 def customer_profile_admin(request , pk):
