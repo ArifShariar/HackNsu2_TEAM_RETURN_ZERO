@@ -69,7 +69,8 @@ def order_view(request , pk):
 
     if request.method == 'POST':
 
-        amount = request.POST.get('amount')
+        amount = request.POST.get('order_quantity')
+        print(amount)
         prod = p.company_product.objects.get(pk=pk)
         prod.stock = prod.stock - int(amount)
         prod.save()

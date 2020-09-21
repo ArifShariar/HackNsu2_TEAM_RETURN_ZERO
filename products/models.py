@@ -11,7 +11,7 @@ class vendor_product_categories(models.Model):
 
 class vendor_product(models.Model):
     name = models.CharField(max_length=30)
-    amount = models.IntegerField()
+    amount = models.CharField(max_length=50, null=True)
     price = models.CharField(max_length=30, null=True)
     category_fk = models.ForeignKey(vendor_product_categories, on_delete=models.DO_NOTHING, null=True)
     vendor_fk = models.ForeignKey(md.Vendor, on_delete=models.CASCADE, null=True)
