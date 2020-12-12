@@ -31,7 +31,7 @@ company, which can also benefit its vendors and customers.
 ---
 
 ### System Architecture: 
-<img src="static/img/HackNsu.png" alt="drawing" height="720" width="720"/>
+<img src="static/img/HackNsu.png" alt="drawing" height="512" width="540"/>
 
 ---
 
