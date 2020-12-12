@@ -1,7 +1,5 @@
 # HackNSU Season 2 Hackathon
 
----
-
 ### Hackathon hosted by NSU ACM Student Chapter
 
 This hackathon aims to automate the daily tasks of a leading garment product manufacturing  
