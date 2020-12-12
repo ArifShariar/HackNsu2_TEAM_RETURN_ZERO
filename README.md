@@ -27,6 +27,8 @@ company, which can also benefit its vendors and customers.
 ---
 
 ### Project Presentation : https://youtu.be/PLesnHNWkdc 
+### Problem Statement :
+<img src="static/img/Problem Statement.JPG" alt="drawing" height="512" width="540"/>
 
 ---
 
