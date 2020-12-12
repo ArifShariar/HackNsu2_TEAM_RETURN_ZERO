@@ -26,7 +26,7 @@ The problem statement of this hackathon was to automate the daily transactions o
 ---
  
 ### Problem Statement 
-<img src="static/img/Problem Statement.JPG" alt="drawing" height="512" width="540"/>
+<img src="static/img/Problem Statement.JPG" alt="drawing" height="600"/>
 
 ### Solution Summary
 
