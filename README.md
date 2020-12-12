@@ -25,11 +25,16 @@ company, which can also benefit its vendors and customers.
     * Password is testpass1234.
 
 ---
-
-### Project Presentation : https://youtu.be/PLesnHNWkdc 
-### Problem Statement :
+ 
+### Problem Statement 
 <img src="static/img/Problem Statement.JPG" alt="drawing" height="512" width="540"/>
 
+### Solution Summary
+
+* Download [this](https://github.com/NazmulTakbir/HackNsu2_TEAM_RETURN_ZERO/blob/master/Solution%20Idea%20Summary.pptx) power point presentation
+
+### Project Presentation 
+* https://youtu.be/PLesnHNWkdc
 ---
 
 ### System Architecture: 
