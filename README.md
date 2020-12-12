@@ -2,7 +2,7 @@
 
 ### Hackathon hosted by NSU ACM Student Chapter
 
-This hackathon aims to automate the daily tasks of a leading garment product manufacturing company, which can also benefit its vendors and customers. 
+The problem statement of this hackathon was to automate the daily transactions of a leading garment product manufacturing company in such a way that would benefit the company as well the vendors and customers associated with it. 
 
 --- 
 
