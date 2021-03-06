@@ -44,7 +44,7 @@ The problem statement of this hackathon was to automate the daily transactions o
 ### Team Return Zero Members: 
 * [Nazmul Takbir](https://github.com/NazmulTakbir)
 * [Sihat Afnan](https://github.com/AfnanCSE98)
-* [Arif Shariar Rahman](https://github.com/1705095)
+* [Arif Shariar Rahman](https://github.com/ArifShariar/)
 
 ---
 
